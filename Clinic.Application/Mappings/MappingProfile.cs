@@ -16,6 +16,8 @@ namespace Clinic.Application.Mappings
             // DTO -> Entity
             CreateMap<PatientUpdateDto, Patient>();
             CreateMap<PatientCreateDto, Patient>();
+            CreateMap<UserRegisterDto, User>();
+            CreateMap<UserLoginDto, User>();
             // Entity -> DTO
             CreateMap<Patient, PatientDto>();
         }

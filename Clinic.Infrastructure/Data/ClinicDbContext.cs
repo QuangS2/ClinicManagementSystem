@@ -12,6 +12,7 @@ namespace Clinic.Infrastructure.Data
     {
         public ClinicDbContext(DbContextOptions<ClinicDbContext> options) : base(options){}
         public DbSet<Patient> Patients { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

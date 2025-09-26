@@ -12,6 +12,7 @@ namespace Clinic.Application
     {
         public static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
+
             services.AddScoped<IPatientService, PatientService>();
             return services;
         }
