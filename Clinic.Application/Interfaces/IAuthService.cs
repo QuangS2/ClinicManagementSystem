@@ -10,7 +10,7 @@ namespace Clinic.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task<string> GenerateToken(User user);
+        Task<string> GenerateToken(ApplicationUser user);
         Task<AuthResult> LoginAsync(string username, string password);
         string HashPassword(string password);
         bool VerifyPassword(string password, string passwordHash);

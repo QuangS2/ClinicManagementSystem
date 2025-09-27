@@ -2,6 +2,7 @@
 using Clinic.Application.DTOs;
 using Clinic.Application.Interfaces;
 using Clinic.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,33 +16,44 @@ namespace Clinic.Application.Services
         private readonly IUserRepository _userRepository;
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IAuthService authService, IMapper mapper)
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+
+        public UserService(IUserRepository userRepository, IAuthService authService, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _userRepository = userRepository;
             _authService = authService;
             _mapper = mapper;
+            _userManager = userManager;
         }
+
         public async Task<string?> LoginAsync(UserLoginDto loginDto)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
-            if (user == null || !_authService.VerifyPassword(loginDto.Password, user.PasswordHash))
+            var user = await _userManager.FindByNameAsync(loginDto.Username);
+            //verify password by user manager
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 return null;
             }
+
             return await _authService.GenerateToken(user);
         }
 
         public async Task<bool> RegisterAsync(UserRegisterDto registerDto)
         {
-            var userExists = await _userRepository.GetUserByUsernameAsync(registerDto.Username);
+            var userExists = await _userManager.FindByNameAsync(registerDto.UserName);
             if (userExists != null)
             {
                 return false;
             }
-            var user = _mapper.Map<User>(registerDto);
-            user.PasswordHash = _authService.HashPassword(registerDto.Password);
-            await _userRepository.AddUserAsync(user);
-            await _userRepository.SaveChangesAsync();
+            var user = _mapper.Map<ApplicationUser>(registerDto);
+            var result = await _userManager.CreateAsync(user,registerDto.Password);
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
             return true;
 
         }

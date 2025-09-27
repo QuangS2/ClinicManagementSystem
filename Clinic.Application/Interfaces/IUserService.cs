@@ -11,5 +11,6 @@ namespace Clinic.Application.Interfaces
     {
         Task<bool> RegisterAsync(UserRegisterDto registerDto);
         Task<string?> LoginAsync(UserLoginDto loginDto);
+
     }
 }

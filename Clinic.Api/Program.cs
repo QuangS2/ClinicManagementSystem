@@ -1,14 +1,12 @@
 using Clinic.Application;
-using Clinic.Application.Interfaces;
 using Clinic.Application.Mappings;
-using Clinic.Application.Services;
+using Clinic.Domain.Entities;
 using Clinic.Infrastructure;
-using Clinic.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore.Design;
 using Clinic.Infrastructure.Data;
-using Clinic.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Clinic.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,12 +30,16 @@ builder.Services.AddAutoMapper(cfg =>
 });
 
 // Dependency Injection for Repositories and Services
-builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-builder.Services.AddScoped<IPatientService, PatientService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+//builder.Services.AddScoped<IPatientService, PatientService>();
+//builder.Services.AddScoped<IAuthService, AuthService>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IUserService, UserService>();
 
+// Identity
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 // JWT Authentication
 builder.Services.AddAuthentication(option =>
@@ -69,8 +71,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//Seed Roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await IdentitySeeder.SeedRoleAsync(roleManager);
+}
+
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

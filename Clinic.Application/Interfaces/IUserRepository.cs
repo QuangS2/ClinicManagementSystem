@@ -9,8 +9,11 @@ namespace Clinic.Application.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User?> GetUserByUsernameAsync(string username);
-        Task AddUserAsync(User user);
+        Task<ApplicationUser?> GetUserByUsernameAsync(string username);
+        Task<ApplicationUser?> GetUserByIdAsync (string userId);
+        Task AddUserAsync(ApplicationUser user);
         Task SaveChangesAsync();
+        //update user
+        Task UpdateUserAsync(ApplicationUser user);
     }
 }

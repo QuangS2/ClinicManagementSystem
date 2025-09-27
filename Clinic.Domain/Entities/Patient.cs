@@ -13,5 +13,8 @@ namespace Clinic.Domain.Entities
         public int Age { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
+
+        // has many appointments
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 }

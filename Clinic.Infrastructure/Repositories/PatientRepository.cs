@@ -12,8 +12,8 @@ namespace Clinic.Infrastructure.Repositories
 {
     public class PatientRepository : IPatientRepository
     {
-        private readonly ClinicDbContext _db;
-        public PatientRepository(ClinicDbContext dbContext)
+        private readonly ApplicationDbContext _db;
+        public PatientRepository(ApplicationDbContext dbContext)
         {
             _db = dbContext;
         }

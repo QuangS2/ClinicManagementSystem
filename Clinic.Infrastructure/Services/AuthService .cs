@@ -13,23 +13,29 @@ using Clinic.Application.DTOs;
 using Clinic.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace Clinic.Infrastructure.Services
 {
     public class AuthService : IAuthService
     {
         private readonly IConfiguration _configuration;
-        private readonly ClinicDbContext _context;
-        public AuthService(IConfiguration configuration, ClinicDbContext context)
+        private readonly ApplicationDbContext _context;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+        
+        public AuthService(IConfiguration configuration, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
             _context = context;
+            _userManager = userManager;
         }
-        public async Task<string> GenerateToken(User user)
+        public async Task<string> GenerateToken(ApplicationUser user)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, user.Username),
+
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim("role", user.Role)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -50,8 +56,9 @@ namespace Clinic.Infrastructure.Services
 
         public async Task<AuthResult> LoginAsync(string username, string password)
         {
-            // Find user by username
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            // Find user by username by user manager
+
+            var user = await _userManager.FindByNameAsync(username);
             // Check if user exists
             if (user == null)
             {

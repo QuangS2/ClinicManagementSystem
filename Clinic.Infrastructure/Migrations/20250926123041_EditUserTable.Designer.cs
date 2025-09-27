@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinic.Infrastructure.Migrations
 {
-    [DbContext(typeof(ClinicDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250926123041_EditUserTable")]
     partial class EditUserTable
     {

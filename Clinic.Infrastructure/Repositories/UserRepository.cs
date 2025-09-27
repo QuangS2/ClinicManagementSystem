@@ -12,23 +12,34 @@ namespace Clinic.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ClinicDbContext _db;
-        public UserRepository(ClinicDbContext dbContext)
+        private readonly ApplicationDbContext _db;
+        public UserRepository(ApplicationDbContext dbContext)
         {
             _db = dbContext;
         }
-        public async Task AddUserAsync(User user)
+        public async Task AddUserAsync(ApplicationUser user)
         {
             await _db.Users.AddAsync(user);
         }
 
-        public async Task<User?> GetUserByUsernameAsync(string username)
+        public async Task<ApplicationUser?> GetUserByIdAsync(string userId)
         {
-            return await _db.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await _db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+        public async Task<ApplicationUser?> GetUserByUsernameAsync(string username)
+        {
+            return await _db.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
         public async Task SaveChangesAsync()
         {
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task UpdateUserAsync(ApplicationUser user)
+        {
+            _db.Users.Update(user);
             await _db.SaveChangesAsync();
         }
     }

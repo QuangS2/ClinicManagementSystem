@@ -1,5 +1,6 @@
 ﻿using Clinic.Application.Interfaces;
 using Clinic.Application.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace Clinic.Application
     {
         public static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
-
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             return services;
         }
     }
