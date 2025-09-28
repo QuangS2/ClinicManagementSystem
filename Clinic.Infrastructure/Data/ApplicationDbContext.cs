@@ -18,6 +18,8 @@ namespace Clinic.Infrastructure.Data
 
         //appointments
         public DbSet<Appointment> Appointments { get; set; } = null!;
+        //Medical Records
+        public DbSet<MedicalRecord> MedicalRecords { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +36,29 @@ namespace Clinic.Infrastructure.Data
                 .HasOne(a => a.Doctor)
                 .WithMany(d => d.Appointments)
                 .HasForeignKey(a => a.DoctorId);
+
+
+            //Medical Record configuration
+            //MedicalRecord has one patient with many medical records and delete patient will not delete medical records
+            modelBuilder.Entity<MedicalRecord>()
+                .HasOne(m => m.Patient)
+                .WithMany(p => p.MedicalRecords)
+                .HasForeignKey(m => m.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //MedicalRecord has one doctor with many medical records and delele doctor will not delete medical records
+            modelBuilder.Entity<MedicalRecord>()
+                .HasOne(m => m.Doctor)
+                .WithMany(d => d.MedicalRecords)
+                .HasForeignKey(m => m.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //MedicalRecord has one appointment and delete medical record when appointment is deleted
+            modelBuilder.Entity<MedicalRecord>()
+                .HasOne(m => m.Appointment)
+                .WithOne(a => a.MedicalRecord)
+                .HasForeignKey<MedicalRecord>(m => m.AppointmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 

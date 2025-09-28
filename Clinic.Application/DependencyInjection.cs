@@ -16,6 +16,7 @@ namespace Clinic.Application
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             return services;
         }
     }

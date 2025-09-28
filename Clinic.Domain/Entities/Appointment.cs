@@ -16,6 +16,8 @@ namespace Clinic.Domain.Entities
         public ApplicationUser Doctor { get; set; }
         public string Reason { get; set; } = string.Empty;
         public AppointmentStatus Notes { get; set; } = AppointmentStatus.Pending;
+        //one appointment has one medical record
+        public MedicalRecord? MedicalRecord { get; set; }
     }
     public enum AppointmentStatus
     {

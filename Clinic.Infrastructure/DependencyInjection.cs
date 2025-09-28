@@ -28,7 +28,7 @@ namespace Clinic.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-
+            services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
 
             return services;
         }

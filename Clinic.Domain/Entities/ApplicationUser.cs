@@ -21,6 +21,8 @@ namespace Clinic.Domain.Entities
 
         //doctor have many appointments
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        //doctor have many medical records
+        public ICollection<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
 
 
 

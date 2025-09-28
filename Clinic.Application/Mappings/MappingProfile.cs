@@ -21,6 +21,10 @@ namespace Clinic.Application.Mappings
             CreateMap<UserUpdateDto, ApplicationUser>();
             //request to appointment
             CreateMap<AppointmentRequest, Appointment>();
+            //request to medical record
+            CreateMap<CreateMedicalRecordRequest, MedicalRecord>();
+            //request to update medical record
+            CreateMap<UpdateMedicalRecordRequest, MedicalRecord>();
 
 
 
@@ -29,7 +33,8 @@ namespace Clinic.Application.Mappings
             CreateMap<Patient, PatientDto>();
             // appointment to response
             CreateMap<Appointment, AppointmentResponse>();
-            
+            // medical record to response
+            CreateMap<MedicalRecord, MedicalRecordDto>();
         }
     }
 }
