@@ -18,6 +18,8 @@ namespace Clinic.Domain.Entities
         public AppointmentStatus Notes { get; set; } = AppointmentStatus.Pending;
         //one appointment has one medical record
         public MedicalRecord? MedicalRecord { get; set; }
+        //one appointment has one invoice
+        public Invoice? Invoice { get; set; }
     }
     public enum AppointmentStatus
     {

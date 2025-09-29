@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Clinic.Application.DTOs;
-using Clinic.Application.Interfaces;
+using Clinic.Application.Interfaces.Repository;
+using Clinic.Application.Interfaces.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;

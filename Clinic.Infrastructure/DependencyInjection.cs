@@ -1,4 +1,5 @@
-﻿using Clinic.Application.Interfaces;
+﻿using Clinic.Application.Interfaces.Repository;
+using Clinic.Application.Interfaces.Service;
 using Clinic.Infrastructure.Data;
 using Clinic.Infrastructure.Repositories;
 using Clinic.Infrastructure.Services;
@@ -29,7 +30,7 @@ namespace Clinic.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
-
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             return services;
         }
     }

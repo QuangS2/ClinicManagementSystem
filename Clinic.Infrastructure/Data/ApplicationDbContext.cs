@@ -21,6 +21,10 @@ namespace Clinic.Infrastructure.Data
         //Medical Records
         public DbSet<MedicalRecord> MedicalRecords { get; set; } = null!;
 
+        //Invoices
+        public DbSet<Invoice> Invoices { get; set; } = null!;
+        //Payments
+        public DbSet<Payment> Payments { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -58,7 +62,27 @@ namespace Clinic.Infrastructure.Data
                 .WithOne(a => a.MedicalRecord)
                 .HasForeignKey<MedicalRecord>(m => m.AppointmentId)
                 .OnDelete(DeleteBehavior.Cascade);
+            //Invoice configuration
+            //invoice has one patient with many invoices, delete patient will not delete invoices
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Patient)
+                .WithMany(p => p.Invoices)
+                .HasForeignKey(i => i.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //invoice has one appointment with one invoices, delete appointment will delete invoices
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Appointment)
+                .WithOne(a => a.Invoice)
+                .HasForeignKey<Invoice>(i => i.AppointmentId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            //Payment configuration
+            //payment has one invoice with many payments, delete invoice will delete payments
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Invoice)
+                .WithMany(i => i.Payments)
+                .HasForeignKey(p => p.InvoiceId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 

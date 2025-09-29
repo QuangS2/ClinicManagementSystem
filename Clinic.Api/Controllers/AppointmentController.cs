@@ -1,8 +1,8 @@
-﻿using Clinic.Application.Interfaces;
-using Clinic.Application.Services;
+﻿using Clinic.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Clinic.Application.DTOs;
+using Clinic.Application.Interfaces.Service;
 
 namespace Clinic.Api.Controllers
 {

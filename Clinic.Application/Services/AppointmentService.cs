@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Clinic.Application.DTOs;
-using Clinic.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Clinic.Domain.Entities;
+using Clinic.Application.Interfaces.Service;
+using Clinic.Application.Interfaces.Repository;
 
 namespace Clinic.Application.Services
 {

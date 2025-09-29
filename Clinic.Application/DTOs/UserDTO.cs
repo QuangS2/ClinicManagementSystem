@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.DTOs
 {
-    public class UserDTO
+    public class UserDto
     {
     }
     public class UserRegisterDto

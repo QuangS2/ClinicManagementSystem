@@ -1,4 +1,4 @@
-﻿using Clinic.Application.Interfaces;
+﻿using Clinic.Application.Interfaces.Service;
 using Clinic.Application.Services;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,7 @@ namespace Clinic.Application
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             return services;
         }
     }

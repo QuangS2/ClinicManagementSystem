@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Clinic.Application.DTOs;
-using Clinic.Application.Interfaces;
+using Clinic.Application.Interfaces.Repository;
+using Clinic.Application.Interfaces.Service;
 using Clinic.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;

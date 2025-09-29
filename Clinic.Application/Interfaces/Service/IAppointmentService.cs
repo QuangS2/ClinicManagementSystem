@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Application.Interfaces
+namespace Clinic.Application.Interfaces.Service
 {
     public interface IAppointmentService
     {

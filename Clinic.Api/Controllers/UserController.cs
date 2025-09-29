@@ -1,5 +1,5 @@
 ﻿using Clinic.Application.DTOs;
-using Clinic.Application.Interfaces;
+using Clinic.Application.Interfaces.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

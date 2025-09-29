@@ -1,5 +1,4 @@
-﻿using Clinic.Application.Interfaces;
-using Clinic.Domain.Entities;
+﻿using Clinic.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +13,7 @@ using Clinic.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
+using Clinic.Application.Interfaces.Service;
 
 namespace Clinic.Infrastructure.Services
 {

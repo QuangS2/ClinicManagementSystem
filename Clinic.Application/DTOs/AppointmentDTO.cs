@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.DTOs
 {
-    public class AppointmentDTO
+    public class AppointmentDto
     {
     }
     //AppointmentRequest

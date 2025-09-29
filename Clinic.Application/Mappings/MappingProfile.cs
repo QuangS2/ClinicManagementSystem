@@ -25,6 +25,12 @@ namespace Clinic.Application.Mappings
             CreateMap<CreateMedicalRecordRequest, MedicalRecord>();
             //request to update medical record
             CreateMap<UpdateMedicalRecordRequest, MedicalRecord>();
+            // DTO -> Entity for invoice
+            CreateMap<CreateInvoiceDto, Invoice>();
+            CreateMap<UpdateInvoiceDto, Invoice>();
+            CreateMap<PaymentCreateDto, Payment>();
+
+
 
 
 
@@ -35,6 +41,10 @@ namespace Clinic.Application.Mappings
             CreateMap<Appointment, AppointmentResponse>();
             // medical record to response
             CreateMap<MedicalRecord, MedicalRecordDto>();
+            // Entity -> DTO for invoice
+            CreateMap<Invoice, InvoiceResponseDto>();
+            CreateMap<Payment, PaymentResponseDto>();
+
         }
     }
 }
